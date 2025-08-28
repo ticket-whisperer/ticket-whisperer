@@ -1,9 +1,28 @@
 [project]
 name = "ticket-whisperer"
 version = "0.1.0"
-description = "Shhhhh."
+description = "A lightweight MCP server and agent for ticket management."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "google-genai",
+    "mcp>=1.0.0",
+    "google-adk>=1.2.0",
+    "pydantic>=2.0.0",
+    "asyncio-mqtt",
+    "click>=8.0.0",
+    "jira>=3.10.5",
+    "fastmcp>=2.11.3",
 ]
+
+[project.scripts]
+ticket-whisperer-server = "whisperer.mcp_servers.server:main"
+jira-agent = "whisperer.agents.jira_agent.agent:main"
+main-agent = "whisperer.agents.main_agent.agent:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/whisperer"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
